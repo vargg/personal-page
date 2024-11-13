@@ -1,0 +1,19 @@
+[project]
+name = "tat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "d>=0.2.2",
+    "dataclass-settings>=0.5.0",
+    "django-bootstrap5>=24.3",
+    "django>=5.1.3",
+    "fontawesomefree>=6.6.0",
+    "gunicorn>=23.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7.3",
+]
