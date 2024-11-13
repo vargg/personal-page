@@ -1,0 +1,19 @@
+<style type="text/css">
+    .footer{
+        background:url("{{ footer.bg_pattern.file.url }}") left top repeat;
+        padding:35px 0 35px;
+        text-align:center;
+    }
+    .footer-logo{
+        margin:5px auto 5px;
+        width: 76px;
+    }
+</style>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-logo"><img src="{{ footer.logo.file.url }}" alt="" height=40>
+        </div>
+        <span class="copyright">{% now "Y" %} {{ footer.copyright_text }}</span>
+    </div>
+</footer>

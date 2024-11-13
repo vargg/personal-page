@@ -1,0 +1,34 @@
+<div class="container">
+    <section class="main-section contact" id="contacts">
+        <div class="row">
+            <div class="col-lg-6 col-sm-7 wow fadeInLeft">
+                {% for item in contacts.details_list.all %}
+                    <div class="contact-info-box clearfix">
+                        <h3><i class="{{ item.icon }}"></i>{{ item.name }}</h3>
+                        <span>{{ item.detail }}</span>
+                    </div>
+                {% endfor %}
+                <ul class="social-link">
+                    {% for item in contacts.link_list.all %}
+                        <li class="social-link-item">
+                            <a href="{{ item.url }}"><i class="{{ item.icon }}"></i></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-lg-6 col-sm-5 wow fadeInUp delay-04s">
+                <div class="form">
+                    <input class="input-text" type="text" name="" value="имя *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
+                    <input class="input-text" type="text" name="" value="телефон *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
+                    <textarea class="input-text text-area" cols="0" rows="0" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">сообщение *</textarea>
+                    <input class="input-text" type="file" id="myfile" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/>
+                    <input class="input-btn" type="submit" value="отправить">
+                </div>
+            </div>
+        </div>
+        {% if contacts.map_widget %}
+            contacts.map_widget
+        {% endif %}
+        <!-- <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a href="https://yandex.ru/maps/213/moscow/house/novodmitrovskaya_ulitsa_1s1/Z04Ycw9kQEIFQFtvfXRxd3lgZA==/?ll=37.584740%2C55.806577&source=serp_navig&utm_medium=mapframe&utm_source=maps&z=17.43" style="color:#eee;font-size:12px;position:absolute;top:14px;">Новодмитровская улица, 1с1 — Яндекс Карты</a><iframe src="https://yandex.ru/map-widget/v1/?ll=37.584740%2C55.806577&mode=whatshere&source=serp_navig&whatshere%5Bpoint%5D=37.584886%2C55.806707&whatshere%5Bzoom%5D=17&z=17.43" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div> -->
+    </section>
+</div>
