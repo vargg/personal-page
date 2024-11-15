@@ -15,7 +15,17 @@ class MessageForwarder:
 
 
 @dataclass
+class Database:
+    host: t.Annotated[str, ds.Env("DB_HOST")] = ""
+    port: t.Annotated[int, ds.Env("DB_PORT")] = 0
+    db_name: t.Annotated[str, ds.Env("DB_NAME")] = ""
+    username: t.Annotated[str, ds.Env("DB_USER")] = ""
+    password: t.Annotated[str, ds.Env("DB_PASSWORD")] = ""
+
+
+@dataclass
 class EnvSettings:
+    db: Database
     message_forwarder: MessageForwarder
 
     debug: bool = True
@@ -93,15 +103,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "conf.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": (
-            ENV_SETTINGS.db_root
-            or BASE_DIR.joinpath("..", "files", "db.sqlite3")
-        ),
+if ENV_SETTINGS.db.host:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": ENV_SETTINGS.db.db_name,
+            "USER": ENV_SETTINGS.db.username,
+            "PASSWORD": ENV_SETTINGS.db.password,
+            "HOST": ENV_SETTINGS.db.host,
+            "PORT": ENV_SETTINGS.db.port,
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": (
+                ENV_SETTINGS.db_root
+                or BASE_DIR.joinpath("..", "files", "db.sqlite3")
+            ),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = []
 for validation in (
