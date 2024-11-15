@@ -176,6 +176,10 @@ p{
 
 
 /* ----- Services ----- */
+.service-image{
+	max-height: 600px;
+	max-width: 600px;
+}
 .service-list-block{
 	padding:20px 20px 20px 20px;
 }
