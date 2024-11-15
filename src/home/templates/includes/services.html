@@ -1,11 +1,11 @@
 {% for block in services.items.all %}
     <section class="main-section" id="services">
         <div class="container">
-            <h2>{{ block.name }}</h2>
-            <h6>{{ block.description }}</h6>
+            <h2>{{ block.name | safe }}</h2>
+            <h6>{{ block.description | safe }}</h6>
             <div class="row">
                 {% if block.image_position == "L" %}
-                    <figure class="col-lg-7 col-sm-6 wow fadeInUp delay-02s">
+                    <figure class="service-image col-lg-7 col-sm-6 wow fadeInUp delay-02s">
                         <img src="{{ block.image.file.url }}" alt="" max-height="500">
                     </figure>
                 {% endif %}
@@ -16,8 +16,8 @@
                                 <i class="{{ item.icon }}"></i>
                             </div>
                             <div class="service-list-col2">
-                                <h3>{{ item.name }}</h3>
-                                <p>{{ item.description }}</p>
+                                <h3>{{ item.name | safe }}</h3>
+                                <p>{{ item.description | safe }}</p>
                             </div>
                         </div>
                     {% endfor %}

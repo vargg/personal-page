@@ -12,9 +12,9 @@
             <figure class="logo animated fadeInDown delay-02s">
                 <img src="{{ start_screen.logo.file.url }}" alt="" height="60">
             </figure>
-            <h1 class="animated fadeInDown delay-04s"> {{ start_screen.primary_text }} </h1>
+            <h1 class="animated fadeInDown delay-04s"> {{ start_screen.primary_text | safe }} </h1>
             <ul class="we-create animated fadeInUp delay-06s">
-                <li> {{ start_screen.secondary_text }} </li>
+                <li> {{ start_screen.secondary_text | safe }} </li>
             </ul>
         </div>
     </header>
