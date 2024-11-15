@@ -3,21 +3,7 @@
 /* ----- CSS Document ----- */
 
 
-/* ----- Float Elements ----- */
-.fl-lt {float:left;}
-.fl-rt {float:right;}
-
-
 /* ----- Clear Floated Elements ----- */
-.clear {
-	clear: both;
-	display: block;
-	overflow: hidden;
-	visibility: hidden;
-	width: 0;
-	height: 0;
-}
-
 .clearfix:before,
 .clearfix:after {
 	content: '\0020';
@@ -100,9 +86,6 @@ p{
 .we-create{
 	padding:0;
 	margin:35px 0 55px;
-}
-.wp-pic{
-	margin-bottom:20px;
 }
 .we-create li{
 	display:inline-block;
