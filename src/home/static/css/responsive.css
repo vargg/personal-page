@@ -9,6 +9,7 @@
 	.service-list{ margin-bottom:30px;}
 	.form{ margin:0 0 0 20px}
 	.main-nav{ display:block !important; }
+	.map-widget{ width: 900px !important; }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -30,6 +31,7 @@
 
 	.main-nav{ display:block !important; }
 	.main-nav li a{ padding:8px 15px;}
+	.map-widget{ width: 700px !important; }
 }
 
 @media only screen and (max-width: 767px) {
@@ -62,6 +64,7 @@
 	.link{ font-size:14px; padding:10px 25px;}
 	.logo{ width:100px;}
 	.main-section.contact{ background-size:contain;}
+	.map-widget{ width: 450px !important; }
 }
 
 @media only screen and (max-width: 479px) {
@@ -71,7 +74,8 @@
 	.header{ padding:40px;}
 	.social-link{ margin-left:0px;}
 	.form{ margin:0}
-	.portfolio-box{  max-width:300px !important; width:96.4% !important; margin:0 !important}
+	.portfolio-box{ max-width:300px !important; width:96.4% !important; margin:0 !important}
 	.portfolio-box img { max-width:100%;}
 	.portfolioContainer{ width:280px !important; margin:0 auto !important }
+	.map-widget{ width: 350px !important; }
 }
