@@ -21,7 +21,7 @@ class BaseModel(models.Model):
 
 
 class Asset(BaseModel):
-    file = models.FileField("файл")
+    file = models.FileField("файл", upload_to="assets/%Y/%m/%d/")
     tag = models.CharField("тэг", max_length=32, default=" ", blank=True)
 
     class Meta:
@@ -252,7 +252,9 @@ class Message(models.Model):
     name = models.TextField("имя", max_length=255)
     phone = models.CharField("телефон", max_length=32)
     text = models.TextField("текст")
-    file = models.FileField("файл", blank=True)
+    file = models.FileField(
+        "файл", upload_to="msg-files/assets/%Y/%m/%d/", blank=True
+    )
 
     is_acknowledged = models.BooleanField("переслано", default=False)
     created_at = models.DateTimeField("создано", auto_now_add=True)
