@@ -45,8 +45,8 @@ class StartScreen(BaseModel):
         on_delete=models.RESTRICT,
         related_name="+",
     )
-    primary_text = models.CharField("основной текст", max_length=255)
-    secondary_text = models.CharField("дополнительный текст", max_length=255)
+    primary_text = models.TextField("основной текст", max_length=255)
+    secondary_text = models.TextField("дополнительный текст", max_length=255)
 
     class Meta:
         verbose_name = "стартовый экран"
@@ -54,7 +54,7 @@ class StartScreen(BaseModel):
 
 
 class Promo(BaseModel):
-    text = models.CharField("текст", max_length=255)
+    text = models.TextField("текст", max_length=255)
 
     class Meta:
         verbose_name = "промо блок"
@@ -63,7 +63,7 @@ class Promo(BaseModel):
 
 class ServiceItem(BaseModel):
     icon = models.CharField("fa-иконка", max_length=64)
-    description = models.CharField("описание", max_length=255)
+    description = models.TextField("описание", max_length=255)
 
     class Meta:
         verbose_name = "услуги: строка"
@@ -75,7 +75,7 @@ class ServiceBlock(BaseModel):
         LEFT = "L", "Left"
         RIGHT = "R", "Right"
 
-    description = models.CharField("описание", max_length=255, default="")
+    description = models.TextField("описание", max_length=255, default="")
     image = models.ForeignKey(
         Asset,
         verbose_name="изображение",
@@ -104,8 +104,10 @@ class Services(BaseModel):
 
 
 class Portfolio(BaseModel):
-    description = models.CharField("описание", max_length=255, default="")
-    items = models.ManyToManyField(Asset, verbose_name="Примеры", related_name="+")
+    description = models.TextField("описание", max_length=255, default="")
+    items = models.ManyToManyField(
+        Asset, verbose_name="Примеры", related_name="+"
+    )
 
     class Meta:
         verbose_name = "портфолио"
@@ -134,7 +136,7 @@ class AboutMe(BaseModel):
 
 class ContactDetail(BaseModel):
     icon = models.CharField("fa-иконка", max_length=64)
-    detail = models.CharField("информация", max_length=512)
+    detail = models.TextField("информация", max_length=512)
 
     class Meta:
         verbose_name = "контакты: данные"
@@ -157,7 +159,7 @@ class Contacts(BaseModel):
     link_list = models.ManyToManyField(
         ContactLink, verbose_name="список ссылок"
     )
-    map_widget = models.CharField(
+    map_widget = models.TextField(
         "виджет карты", max_length=2048, default="", blank=True
     )
 
@@ -176,7 +178,7 @@ class Footer(BaseModel):
         on_delete=models.RESTRICT,
         related_name="+",
     )
-    copyright_text = models.CharField("копирайт", max_length=512)
+    copyright_text = models.TextField("копирайт", max_length=512)
 
     class Meta:
         verbose_name = "футер"
@@ -202,7 +204,7 @@ class Page(BaseModel):
         on_delete=models.RESTRICT,
         related_name="+",
     )
-    title = models.CharField("название страницы", max_length=255)
+    title = models.TextField("название страницы", max_length=255)
 
     start_screen = models.ForeignKey(
         StartScreen, verbose_name="стартовый экран", on_delete=models.RESTRICT
@@ -244,3 +246,13 @@ class Page(BaseModel):
 
         queryset = Page.objects.filter(~models.Q(pk__in=(self.pk,)), is_active=True)
         queryset.update(is_active=False)
+
+
+class Message(models.Model):
+    name = models.TextField("имя", max_length=255)
+    phone = models.CharField("телефон", max_length=32)
+    text = models.TextField("текст")
+    file = models.FileField("файл", blank=True)
+
+    is_acknowledged = models.BooleanField("переслано", default=False)
+    created_at = models.DateTimeField("создано", auto_now_add=True)
