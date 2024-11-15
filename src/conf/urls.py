@@ -6,7 +6,7 @@ from django.urls import include, path
 from home import urls as core_urls
 
 urlpatterns = [
-    path("", include(core_urls)),
+    path("", include(core_urls, namespace="home")),
     path("admin/", admin.site.urls),
 ]
 

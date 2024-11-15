@@ -1,11 +1,11 @@
 <div class="container">
     <section class="main-section contact" id="contacts">
         <div class="row">
-            <div class="col-lg-6 col-sm-7 wow fadeInLeft">
+            <div class="col-lg-4 col-md-5 wow fadeInLeft">
                 {% for item in contacts.details_list.all %}
                     <div class="contact-info-box clearfix">
                         <h3><i class="{{ item.icon }}"></i>{{ item.name | safe }}</h3>
-                        <span>{{ item.detail }}</span>
+                        <span>{{ item.detail | safe }}</span>
                     </div>
                 {% endfor %}
                 <ul class="social-link">
@@ -16,18 +16,11 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="col-lg-6 col-sm-5 wow fadeInUp delay-04s">
-                <div class="form">
-                    <input class="input-text" type="text" name="" value="имя *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <input class="input-text" type="text" name="" value="телефон *" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
-                    <textarea class="input-text text-area" cols="0" rows="0" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">сообщение *</textarea>
-                    <input class="input-text" type="file" id="myfile" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;"/>
-                    <input class="input-btn" type="submit" value="отправить">
-                </div>
+            <div class="col-lg-8 col-md-7 wow fadeInUp delay-04s">
+                {% if contacts.map_widget %}
+                    {{ contacts.map_widget | safe }}
+                {% endif %}
             </div>
         </div>
-        {% if contacts.map_widget %}
-            {{ contacts.map_widget | safe }}
-        {% endif %}
     </section>
 </div>

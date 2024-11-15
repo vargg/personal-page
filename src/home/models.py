@@ -246,15 +246,3 @@ class Page(BaseModel):
 
         queryset = Page.objects.filter(~models.Q(pk__in=(self.pk,)), is_active=True)
         queryset.update(is_active=False)
-
-
-class Message(models.Model):
-    name = models.TextField("имя", max_length=255)
-    phone = models.CharField("телефон", max_length=32)
-    text = models.TextField("текст")
-    file = models.FileField(
-        "файл", upload_to="msg-files/assets/%Y/%m/%d/", blank=True
-    )
-
-    is_acknowledged = models.BooleanField("переслано", default=False)
-    created_at = models.DateTimeField("создано", auto_now_add=True)

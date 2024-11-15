@@ -1,10 +1,21 @@
+import typing as t
+
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpRequest, HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 
 from .models import Page
 
+INDEX_TEMPLATE = "index.html"
 
-def _make_context_for_page(page: Page) -> dict:
+
+def _render_index_template(
+    request: HttpRequest, context: dict
+) -> HttpResponse:
+    return render(request, INDEX_TEMPLATE, context=context)
+
+
+def _make_context_for_page(page: Page) -> dict[str, t.Any]:
     return {
         "page": page,
         "start_screen": page.start_screen,
@@ -17,22 +28,18 @@ def _make_context_for_page(page: Page) -> dict:
     }
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     page = Page.objects.filter(is_active=True).first()
     if not page:
-        return render(request, "404.html")
+        return HttpResponseNotFound()
 
-    return render(
-        request, "index.html", context=_make_context_for_page(page),
-    )
+    return _render_index_template(request, _make_context_for_page(page))
 
 
 @user_passes_test(lambda user: user.is_superuser)
-def preview(request, pk):
+def preview(request: HttpRequest, pk: int) -> HttpResponse:
     page = Page.objects.filter(pk=pk).first()
     if not page:
-        return render(request, "404.html")
+        return HttpResponseNotFound()
 
-    return render(
-        request, "index.html", context=_make_context_for_page(page)
-    )
+    return _render_index_template(request, _make_context_for_page(page))
