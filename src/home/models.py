@@ -4,7 +4,12 @@ from django.db import models
 
 class BaseModel(models.Model):
     name = models.CharField("название", max_length=64)
-    note = models.CharField("примечание", max_length=128, default="", blank=True)
+    note = models.CharField(
+        "примечание", max_length=128, default="", blank=True
+    )
+    description = models.TextField(
+        "описание", max_length=512, default="", blank=True
+    )
 
     created_at = models.DateTimeField("создано", auto_now_add=True)
     updated_at = models.DateTimeField("изменено", auto_now=True)
@@ -63,7 +68,6 @@ class Promo(BaseModel):
 
 class ServiceItem(BaseModel):
     icon = models.CharField("fa-иконка", max_length=64)
-    description = models.TextField("описание", max_length=255)
 
     class Meta:
         verbose_name = "услуги: строка"
@@ -75,7 +79,6 @@ class ServiceBlock(BaseModel):
         LEFT = "L", "Left"
         RIGHT = "R", "Right"
 
-    description = models.TextField("описание", max_length=255, default="")
     image = models.ForeignKey(
         Asset,
         verbose_name="изображение",
@@ -104,7 +107,6 @@ class Services(BaseModel):
 
 
 class Portfolio(BaseModel):
-    description = models.TextField("описание", max_length=255, default="")
     items = models.ManyToManyField(
         Asset, verbose_name="Примеры", related_name="+"
     )
