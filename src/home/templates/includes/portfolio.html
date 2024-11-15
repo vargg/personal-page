@@ -6,7 +6,7 @@
     <div class="portfolioContainer wow fadeInUp delay-04s">
         {% for item in portfolio.items.all %}
             <div class="portfolio-box">
-                <img class="portfolio-image" src="{{ item.file.url }}" alt="">
+                <img class="portfolio-image" src="{{ item.file.url }}" alt="{{ item.file.description }}">
             </div>
         {% endfor %}
     </div>
@@ -15,13 +15,11 @@
         <img src="" alt="Modal image" class="portfolio-modal-content" id="portfolio-modal-content">
     </div>
 </section>
-
 <script type="text/javascript">
     const images = document.querySelectorAll(".portfolio-image");
     const modal = document.getElementById("portfolio-modal-id");
     const modalContent = document.getElementById("portfolio-modal-content");
     const closeBtn = document.querySelector(".portfolio-modal-close");
-
     images.forEach((image) => {
     image.addEventListener("click", () => {
         modal.style.display = "block";
@@ -29,12 +27,9 @@
         modalContent.src = image.src;
     });
     });
-
     closeBtn.addEventListener("click", () => {
         modal.style.display = "none";
     });
-
-
     window.addEventListener("click", (event) => {
     if (event.target == modal) {
         modal.style.display = "none";

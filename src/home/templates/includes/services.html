@@ -6,7 +6,7 @@
             <div class="row">
                 {% if block.image_position == "L" %}
                     <figure class="service-image col-lg-7 col-sm-6 wow fadeInUp delay-02s">
-                        <img src="{{ block.image.file.url }}" alt="" max-height="500">
+                        <img src="{{ block.image.file.url }}" alt="{{ block.image.description }}" max-height="500">
                     </figure>
                 {% endif %}
                 <div class="service-list-block col-lg-5 col-sm-6 wow fadeInLeft delay-04s">
@@ -24,7 +24,7 @@
                 </div>
                 {% if block.image_position == "R" %}
                     <figure class="service-image col-lg-7 col-sm-6 wow fadeInUp delay-02s">
-                        <img src="{{ block.image.file.url }}" alt="" max-height="500">
+                        <img src="{{ block.image.file.url }}" alt="{{ block.image.description }}" max-height="500">
                     </figure>
                 {% endif %}
             </div>

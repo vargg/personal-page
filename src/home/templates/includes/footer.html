@@ -9,10 +9,9 @@
         width: 76px;
     }
 </style>
-
 <footer class="footer">
     <div class="container">
-        <div class="footer-logo"><img src="{{ footer.logo.file.url }}" alt="" height=40>
+        <div class="footer-logo"><img src="{{ footer.logo.file.url }}" alt="{{ footer.logo.description }}" height=40>
         </div>
         <span class="copyright">{% now "Y" %} {{ footer.copyright_text }}</span>
     </div>
