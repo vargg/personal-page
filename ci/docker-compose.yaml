@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16.5
-    container_name: db
+    container_name: personal-page-db
     restart: always
     shm_size: 300mb
     volumes:
@@ -9,7 +9,7 @@ services:
     env_file:
       - .env
   app:
-    image: personal-page:latest
+    image: personal-page-app:${APP_VERSION:-latest}
     container_name: personal-page-app
     command: "uv run gunicorn -b 0.0.0.0:8000 conf.wsgi"
     volumes:
@@ -25,8 +25,9 @@ services:
     container_name: personal-page-nginx
     shm_size: 300mb
     ports:
-    - "8001:80"
+    - "443:443"
     volumes:
+      - "./certs/:/etc/nginx/certs"
       - "./nginx.conf:/etc/nginx/conf.d/default.conf"
       - "page-static-files:/var/html/static"
       - "page-media-files:/var/html/media"
