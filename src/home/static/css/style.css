@@ -202,47 +202,90 @@ p{
 
 /* ----- Portfolio ----- */
 .portfolioContainer{
+	text-align:center;
 	margin:0 auto;
 	padding-left:15px;
+	max-width: 1140px;
 }
-
 .portfolio-box{
 	text-align:center;
-	margin-bottom:30px;
-	height:350px;
-	width:350px;
+	max-height:360px;
+	max-width:360px;
 	overflow:hidden;
-	float:left;
-	padding:0;
+	display:inline-block;
 }
-.portfolio-box img{
-	margin-bottom:25px;
-	transition:all 0.3s ease-in-out;
-	-moz-transition:all 0.3s ease-in-out;
-	-webkit-transition:all 0.3s ease-in-out;
-}
-
 .portfolio-box img:hover {
 	opacity: 0.6;
 }
 
-img {
-	max-width:100%;
+.portfolio-modal{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1;
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
-/* no transition on .isotope container */
-
-.isotope .isotope-item {
-  /* change duration value to whatever you like */
-	-webkit-transition-duration: 0.6s;
-		-moz-transition-duration: 0.6s;
-			transition-duration: 0.6s;
+  /* Modal Content (Image) */
+.portfolio-modal-content{
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
 }
 
-.isotope .isotope-item {
-	-webkit-transition-property: -webkit-transform, opacity;
-		-moz-transition-property:    -moz-transform, opacity;
-			transition-property:         transform, opacity;
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+	text-align: center;
+	color: #ccc;
+	padding: 10px 0;
+	height: 150px;
+}
+
+  /* Add Animation - Zoom in the Modal */
+.portfolio-modal-content,#caption{
+	animation-name: zoom;
+	animation-duration: 0.6s;
+}
+
+@keyframes zoom{
+	from {transform:scale(0)}
+	to {transform:scale(1)}
+}
+
+/* The Close Button */
+.portfolio-modal-close{
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.portfolio-modal-close:hover,
+.portfolio-modal-close:focus{
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+  /* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+	.portfolio-modal-content {
+		width: 100%;
+	}
 }
 
 .main-section.paddind{
@@ -471,10 +514,6 @@ img {
 
 .res-nav_click:hover, .res-nav_click:active, .res-nav_click:focus {
 	color: #7cc576 !important;
-}
-
-.portfolioContainer{
-	max-width: 1140px;
 }
 
 
