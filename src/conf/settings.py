@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     "fontawesomefree",
     "home",
+    "sortedm2m",
 ]
 
 MIDDLEWARE = [
