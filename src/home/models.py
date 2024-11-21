@@ -1,5 +1,6 @@
 # ruff: noqa: D105, D106
 from django.db import models
+from sortedm2m.fields import SortedManyToManyField
 
 
 class BaseModel(models.Model):
@@ -99,7 +100,7 @@ class ServiceBlock(BaseModel):
 
 
 class Services(BaseModel):
-    items = models.ManyToManyField(ServiceBlock, verbose_name="блоки")
+    items = SortedManyToManyField(ServiceBlock, verbose_name="блоки")
 
     class Meta:
         verbose_name = "услуги"
