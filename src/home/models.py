@@ -92,7 +92,7 @@ class ServiceBlock(BaseModel):
         choices=PositionChoice,
         default=PositionChoice.LEFT,
     )
-    items = models.ManyToManyField(ServiceItem, verbose_name="строки")
+    items = SortedManyToManyField(ServiceItem, verbose_name="строки")
 
     class Meta:
         verbose_name = "услуги: блок"
@@ -108,7 +108,7 @@ class Services(BaseModel):
 
 
 class Portfolio(BaseModel):
-    items = models.ManyToManyField(
+    items = SortedManyToManyField(
         Asset, verbose_name="Примеры", related_name="+"
     )
 
@@ -156,10 +156,10 @@ class ContactLink(BaseModel):
 
 
 class Contacts(BaseModel):
-    details_list = models.ManyToManyField(
+    details_list = SortedManyToManyField(
         ContactDetail, verbose_name="список данных"
     )
-    link_list = models.ManyToManyField(
+    link_list = SortedManyToManyField(
         ContactLink, verbose_name="список ссылок"
     )
     map_widget = models.TextField(
@@ -189,6 +189,9 @@ class Footer(BaseModel):
 
 
 class Page(BaseModel):
+    title = models.TextField("название страницы", max_length=255)
+    is_active = models.BooleanField("сделать активной", default=False)
+
     icon = models.ForeignKey(
         Asset,
         verbose_name="иконка (png)",
@@ -207,7 +210,6 @@ class Page(BaseModel):
         on_delete=models.RESTRICT,
         related_name="+",
     )
-    title = models.TextField("название страницы", max_length=255)
 
     start_screen = models.ForeignKey(
         StartScreen, verbose_name="стартовый экран", on_delete=models.RESTRICT
@@ -235,8 +237,6 @@ class Page(BaseModel):
         Footer, verbose_name="футер", on_delete=models.RESTRICT
     )
 
-    is_active = models.BooleanField("сделать активной", default=False)
-
     class Meta:
         verbose_name = "Страница"
         verbose_name_plural = "Страницы"
@@ -247,5 +247,7 @@ class Page(BaseModel):
         if not self.is_active:
             return
 
-        queryset = Page.objects.filter(~models.Q(pk__in=(self.pk,)), is_active=True)
+        queryset = Page.objects.filter(
+            ~models.Q(pk__in=(self.pk,)), is_active=True
+        )
         queryset.update(is_active=False)

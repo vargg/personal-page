@@ -1,7 +1,4 @@
 from django.contrib import admin
-from .models import Services, ServiceBlock
-from sortedm2m_filter_horizontal_widget.forms import SortedFilteredSelectMultiple
-from sortedm2m.fields import SortedManyToManyField
 
 from . import models
 
@@ -47,19 +44,17 @@ class ServiceItemAdmin(BaseAdmin):
 
 @admin.register(models.ServiceBlock)
 class ServiceBlockAdmin(BaseAdmin):
-    filter_horizontal = (DK.items,)
+    pass
 
 
 @admin.register(models.Services)
 class ServicesAdmin(BaseAdmin):
-    formfield_overrides = { # в теории должно добавлять новый виджет, который будет поддерживать перетаскивание Блоков Услуг
-        SortedManyToManyField: {'widget': SortedFilteredSelectMultiple},
-    }
+    pass
 
 
 @admin.register(models.Portfolio)
 class PortfolioAdmin(BaseAdmin):
-    filter_horizontal = (DK.items,)
+    pass
 
 
 @admin.register(models.AboutMe)
@@ -79,7 +74,7 @@ class ContactDetailAdmin(BaseAdmin):
 
 @admin.register(models.Contacts)
 class ContactsAdmin(BaseAdmin):
-    filter_horizontal = (DK.details_list, DK.link_list)
+    pass
 
 
 @admin.register(models.Footer)
