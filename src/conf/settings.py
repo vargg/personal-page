@@ -6,15 +6,6 @@ import dataclass_settings as ds
 
 
 @dataclass
-class MessageForwarder:
-    worker_timeout: t.Annotated[int, ds.Env("WORKER_TIMEOUT")] = 30
-    request_timeout: t.Annotated[int, ds.Env("REQUEST_TIMEOUT")] = 3
-    batch_size: t.Annotated[int, ds.Env("BATCH_SIZE")] = 10
-    api_token: t.Annotated[str, ds.Env("API_TOKEN")] = ""
-    chat_id: t.Annotated[int, ds.Env("CHAT_ID")] = 0
-
-
-@dataclass
 class Database:
     host: t.Annotated[str, ds.Env("DB_HOST")] = ""
     port: t.Annotated[int, ds.Env("DB_PORT")] = 0
@@ -26,7 +17,6 @@ class Database:
 @dataclass
 class EnvSettings:
     db: Database
-    message_forwarder: MessageForwarder
 
     debug: bool = True
     secret_key: t.Annotated[str, ds.Env("SECRET_KEY")] = ""
@@ -101,6 +91,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = "conf.wsgi.application"
 
