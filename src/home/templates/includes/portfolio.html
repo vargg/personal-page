@@ -6,7 +6,7 @@
     <div class="portfolioContainer wow fadeInUp delay-04s">
         {% for item in portfolio.items.all %}
             <div class="portfolio-box">
-                <img class="portfolio-image" src="{{ item.file.url }}" alt="{{ item.file.description }}">
+                <img class="portfolio-image" src="{{ item.file.url }}" alt="{{ item.file.description }}" loading="lazy">
             </div>
         {% endfor %}
     </div>
