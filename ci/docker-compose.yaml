@@ -11,18 +11,19 @@ services:
   app:
     image: personal-page-app:${APP_VERSION:-latest}
     container_name: personal-page-app
+    restart: always
+    shm_size: 300mb
     command: "uv run gunicorn -b 0.0.0.0:8000 conf.wsgi"
     volumes:
       - "page-static-files:/home/app/files/static"
       - "page-media-files:/home/app/files/media"
-    restart: always
-    shm_size: 300mb
     env_file: .env
     depends_on:
       - db
   nginx:
     image: nginx:1.27
     container_name: personal-page-nginx
+    restart: always
     shm_size: 300mb
     ports:
     - "443:443"
