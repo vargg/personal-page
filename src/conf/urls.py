@@ -7,7 +7,7 @@ from home import urls as core_urls
 
 urlpatterns = [
     path("", include(core_urls, namespace="home")),
-    path("admin/", admin.site.urls),
+    path("adm/", admin.site.urls),
 ]
 
 if settings.DEBUG:
