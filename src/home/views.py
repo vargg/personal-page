@@ -20,6 +20,7 @@ def _make_context_for_page(page: Page) -> dict[str, t.Any]:
         "page": page,
         "start_screen": page.start_screen,
         "promo": page.promo,
+        "nav_bar": page.show_nav_bar,
         "services": page.services,
         "about_me": page.about_me,
         "portfolio": page.portfolio,

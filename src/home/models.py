@@ -5,12 +5,8 @@ from sortedm2m.fields import SortedManyToManyField
 
 class BaseModel(models.Model):
     name = models.CharField("название", max_length=64)
-    note = models.CharField(
-        "примечание", max_length=128, default="", blank=True
-    )
-    description = models.TextField(
-        "описание", max_length=512, default="", blank=True
-    )
+    note = models.CharField("примечание", max_length=128, default="", blank=True)
+    description = models.TextField("описание", max_length=512, default="", blank=True)
 
     created_at = models.DateTimeField("создано", auto_now_add=True)
     updated_at = models.DateTimeField("изменено", auto_now=True)
@@ -35,10 +31,7 @@ class Asset(BaseModel):
         verbose_name_plural = "ассеты"
 
     def __str__(self) -> str:
-        return (
-            f"{self.__class__.__name__}: "
-            f"'{self.name} - {self.tag}' ({self.updated_at.date()})"
-        )
+        return f"{self.__class__.__name__}: '{self.name} - {self.tag}' ({self.updated_at.date()})"
 
 
 class StartScreen(BaseModel):
@@ -108,9 +101,7 @@ class Services(BaseModel):
 
 
 class Portfolio(BaseModel):
-    items = SortedManyToManyField(
-        Asset, verbose_name="Примеры", related_name="+"
-    )
+    items = SortedManyToManyField(Asset, verbose_name="Примеры", related_name="+")
 
     class Meta:
         verbose_name = "портфолио"
@@ -156,15 +147,9 @@ class ContactLink(BaseModel):
 
 
 class Contacts(BaseModel):
-    details_list = SortedManyToManyField(
-        ContactDetail, verbose_name="список данных"
-    )
-    link_list = SortedManyToManyField(
-        ContactLink, verbose_name="список ссылок"
-    )
-    map_widget = models.TextField(
-        "виджет карты", max_length=2048, default="", blank=True
-    )
+    details_list = SortedManyToManyField(ContactDetail, verbose_name="список данных")
+    link_list = SortedManyToManyField(ContactLink, verbose_name="список ссылок")
+    map_widget = models.TextField("виджет карты", max_length=2048, default="", blank=True)
 
     class Meta:
         verbose_name = "контакты"
@@ -221,21 +206,20 @@ class Page(BaseModel):
         blank=True,
         null=True,
     )
+    show_nav_bar = models.BooleanField("показывать панель навигации", default=True)
     services = models.ForeignKey(
-        Services, verbose_name="услуги", on_delete=models.RESTRICT
+        Services, verbose_name="услуги", on_delete=models.RESTRICT, blank=True, null=True
     )
     portfolio = models.ForeignKey(
-        Portfolio, verbose_name="портфолио", on_delete=models.RESTRICT
+        Portfolio, verbose_name="портфолио", on_delete=models.RESTRICT, blank=True, null=True
     )
     about_me = models.ForeignKey(
-        AboutMe, verbose_name="обо мне", on_delete=models.RESTRICT
+        AboutMe, verbose_name="обо мне", on_delete=models.RESTRICT, blank=True, null=True
     )
     contacts = models.ForeignKey(
-        Contacts, verbose_name="контакты", on_delete=models.RESTRICT
+        Contacts, verbose_name="контакты", on_delete=models.RESTRICT, blank=True, null=True
     )
-    footer = models.ForeignKey(
-        Footer, verbose_name="футер", on_delete=models.RESTRICT
-    )
+    footer = models.ForeignKey(Footer, verbose_name="футер", on_delete=models.RESTRICT)
 
     class Meta:
         verbose_name = "Страница"
@@ -247,7 +231,5 @@ class Page(BaseModel):
         if not self.is_active:
             return
 
-        queryset = Page.objects.filter(
-            ~models.Q(pk__in=(self.pk,)), is_active=True
-        )
+        queryset = Page.objects.filter(~models.Q(pk__in=(self.pk,)), is_active=True)
         queryset.update(is_active=False)
