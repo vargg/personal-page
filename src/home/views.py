@@ -32,7 +32,6 @@ def _make_context_for_page(page: Page) -> dict[str, t.Any]:
 def _get_first_page(filter_kwargs: dict) -> Page | None:
     selected = (
         "icon",
-        "shortcut_icon",
         "logo",
         "start_screen",
         "start_screen__logo",

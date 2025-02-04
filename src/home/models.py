@@ -183,12 +183,6 @@ class Page(BaseModel):
         on_delete=models.RESTRICT,
         related_name="+",
     )
-    shortcut_icon = models.ForeignKey(
-        Asset,
-        verbose_name="иконка (ico)",
-        on_delete=models.RESTRICT,
-        related_name="+",
-    )
     logo = models.ForeignKey(
         Asset,
         verbose_name="лого панели навигации",

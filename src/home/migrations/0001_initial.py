@@ -236,7 +236,6 @@ class Migration(migrations.Migration):
                 ('footer', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='home.footer', verbose_name='футер')),
                 ('icon', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='+', to='home.asset', verbose_name='иконка (png)')),
                 ('logo', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='+', to='home.asset', verbose_name='лого панели навигации')),
-                ('shortcut_icon', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='+', to='home.asset', verbose_name='иконка (ico)')),
                 ('portfolio', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='home.portfolio', verbose_name='портфолио')),
                 ('promo', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='home.promo', verbose_name='промо блок')),
                 ('services', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='home.services', verbose_name='услуги')),

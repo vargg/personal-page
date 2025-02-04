@@ -30,13 +30,8 @@ def _create_assets(AssetModel):
         name="icon-placeholder.png",
         file=File(icon_file.open("rb"), name=icon_file.name),
     )
-    icon_shortcut_file = DEFAULT_FILES_DIR.joinpath("icon-placeholder.ico")
-    icon_shortcut = AssetModel.objects.create(
-        name="icon-placeholder.ico",
-        file=File(icon_shortcut_file.open("rb"), name=icon_shortcut_file.name),
-    )
 
-    return pattern, image, logo, icon, icon_shortcut
+    return pattern, image, logo, icon
 
 
 def _create_start_screen(StartScreenModel, logo, pattern):
@@ -233,7 +228,7 @@ def create_page(apps, _schema_editor) -> None:
     FooterModel = apps.get_model("home", "Footer")
     PageModel = apps.get_model("home", "Page")
 
-    pattern, image, logo, icon, icon_shortcut = _create_assets(AssetModel)
+    pattern, image, logo, icon = _create_assets(AssetModel)
 
     PageModel.objects.create(
         name="sample page",
@@ -241,7 +236,6 @@ def create_page(apps, _schema_editor) -> None:
         title="sample page title",
         logo=logo,
         icon=icon,
-        shortcut_icon=icon_shortcut,
         start_screen=_create_start_screen(StartScreenModel, logo, pattern),
         promo=_create_promo(PromoModel),
         services=_create_services(
