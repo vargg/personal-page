@@ -16,7 +16,7 @@ class DK:
 
 
 class BaseAdmin(admin.ModelAdmin):
-    list_display = (DK.id_, DK.name, DK.created_at, DK.updated_at)
+    list_display: tuple[str, ...] = (DK.id_, DK.name, DK.created_at, DK.updated_at)
     list_display_links = (DK.id_, DK.name)
     search_fields = (DK.name,)
 
