@@ -2,7 +2,9 @@
     <section class="main-section" id="services">
         <div class="container">
             <h2>{{ block.name | safe }}</h2>
-            <h6>{{ block.description | safe }}</h6>
+            {% if block.description %}
+                <h6>{{ block.description | safe }}</h6>
+            {% endif %}
             <div class="row">
                 {% if block.image_position == "L" %}
                     <figure class="service-image col-lg-7 col-sm-6 wow fadeInUp delay-02s">
@@ -17,7 +19,9 @@
                             </div>
                             <div class="service-list-col2">
                                 <h3>{{ item.name | safe }}</h3>
-                                <p>{{ item.description | safe }}</p>
+                                {% if item.description %}
+                                    <p>{{ item.description | safe }}</p>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
