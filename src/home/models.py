@@ -31,7 +31,10 @@ class Asset(BaseModel):
         verbose_name_plural = "ассеты"
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__}: '{self.name} - {self.tag}' ({self.updated_at.date()})"
+        return (
+            f"{self.__class__.__name__}: '{self.name} - {self.tag}' "
+            f"({self.updated_at.date().strftime('%d.%m.%Y')})"
+        )
 
 
 class StartScreen(BaseModel):
