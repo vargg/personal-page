@@ -14,11 +14,15 @@ class Database:
     password: t.Annotated[str, ds.Env("DB_PASSWORD")] = ""
 
 
+def _str_to_bool(value: str) -> bool:
+    return value.lower() in ("true", "t", "1")
+
+
 @dataclass
 class EnvSettings:
     db: Database
 
-    debug: bool = True
+    debug: t.Annotated[str, ds.Env("DEBUG")] = "True"
     secret_key: t.Annotated[str, ds.Env("SECRET_KEY")] = ""
     allowed_hosts: t.Annotated[str, ds.Env("ALLOWED_HOSTS")] = ""
 
@@ -39,7 +43,7 @@ SECRET_KEY = (
     or "django-insecure-a%3n=nw*e37eoc00dy+q2psi==#9jy0)##4s%l=#^&1sf=(#_)"
 )
 
-DEBUG = ENV_SETTINGS.debug
+DEBUG = _str_to_bool(ENV_SETTINGS.debug)
 
 ALLOWED_HOSTS: list[str] = (
     ENV_SETTINGS.allowed_hosts.split(",") if ENV_SETTINGS.allowed_hosts else []
